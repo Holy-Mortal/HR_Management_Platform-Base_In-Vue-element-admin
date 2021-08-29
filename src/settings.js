@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Holy-Mortal',
+  title: '人力资源管理平台',
 
   /**
    * @type {boolean} true | false
