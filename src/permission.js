@@ -10,14 +10,19 @@ import 'nprogress/nprogress.css' // 引入进度条样式
 */
 const whiteList = ['/login', '/404'] // 定义白名单
 // next是前置守卫必须执行的钩子，否则页面死住 next()：放过 next(false)：跳转终止 next(地址)：跳转到摸个地址
-router.beforeEach((to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   nprogress.start() // 开启进度条
   if (store.getters.token) {
-    // 如果有 token
+    // 如果有 token // 只有有 token 时，才能获取资料
     if (to.path === '/login') {
       // 如果要访问的是 登录页
       next('/') // 跳到主页
     } else {
+      // 放过时，才能获取资料，如果当前 vuex 中有用户资料的 id ，则不需要获取，如果没有 id 才需要获取
+      if (!store.getters.userId) {
+        // 如果没有 id 才需要获取，后续需要获取数据，将其改为同步
+        await store.dispatch('user/getUserInfo')
+      }
       next() // 放过
     }
   } else {
