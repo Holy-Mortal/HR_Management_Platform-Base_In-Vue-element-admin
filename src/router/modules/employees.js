@@ -14,6 +14,20 @@ export default {
         title: '员工管理', // 左侧导航会读取此处 title
         icon: 'people'
       }
+    }, {
+      path: 'detail/:id', // ?的含义是表示该参数可传可不传  动态路由参数  /employees/detail/123
+      component: () => import('@/views/employees/detail'),
+      hidden: true, // 表示该内容不在左侧菜单显示
+      meta: {
+        title: '员工详情'
+      }
+    }, {
+      path: 'print/:id', // ?的含义是表示该参数可传可不传  动态路由参数  /employees/detail/123
+      component: () => import('@/views/employees/print'),
+      hidden: true, // 表示该内容不在左侧菜单显示
+      meta: {
+        title: '员工打印'
+      }
     }
   ]
 }
