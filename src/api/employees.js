@@ -69,6 +69,7 @@ export function saveUserDetailById(data) {
 **/
 export function getPersonalDetail(id) {
   return request({
+    method: 'GET',
     url: `/employees/${id}/personalInfo`
   })
 }
@@ -78,8 +79,8 @@ export function getPersonalDetail(id) {
 **/
 export function updatePersonal(data) {
   return request({
+    method: 'PUT',
     url: `/employees/${data.userId}/personalInfo`,
-    method: 'put',
     data
   })
 }
@@ -89,6 +90,7 @@ export function updatePersonal(data) {
 **/
 export function getJobDetail(id) {
   return request({
+    method: 'GET',
     url: `/employees/${id}/jobs`
   })
 }
@@ -98,8 +100,19 @@ export function getJobDetail(id) {
 **/
 export function updateJob(data) {
   return request({
+    method: 'PUT',
     url: `/employees/${data.userId}/jobs`,
-    method: 'put',
+    data
+  })
+}
+
+/**
+ * 给用户分配角色
+**/
+export function assignRoles(data) {
+  return request({
+    method: 'PUT',
+    url: '/sys/user/assignRoles',
     data
   })
 }

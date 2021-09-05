@@ -73,14 +73,14 @@ export const constantRoutes = [
         component: () => import('@/views/import')
       }
     ]
-  },
+  }
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 
 // 定义并导出动态路由变量（权限时使用）
-export const asyncRouter = [
+export const asyncRoutes = [
   approvalsRouter,
   departmentsRouter,
   employeesRouter,
@@ -94,7 +94,8 @@ export const asyncRouter = [
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: [...constantRoutes, ...asyncRouter] // 静态路由和动态路由的临时合并
+  routes: [...constantRoutes]
+  // routes: [...constantRoutes, ...asyncRoutes] // 静态路由和动态路由的临时合并
 })
 
 const router = createRouter() // 实例化路由
