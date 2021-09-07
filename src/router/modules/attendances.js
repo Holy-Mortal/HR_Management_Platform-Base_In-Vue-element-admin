@@ -1,6 +1,7 @@
 // 导出员工路由规则
 import Layout from '@/layout'
-export default {
+
+const attendRouter = {
   // 路由规则
   path: '/attendances', // 路由地址
   name: 'attendances', // 模块一级路由加 name 属性 做权限时使用
@@ -14,6 +15,24 @@ export default {
         title: '考勤', // 左侧导航会读取此处 title
         icon: 'skill'
       }
+    }, {
+      path: 'archiving',
+      component: () => import('@/views/attendances/historical'),
+      name: 'archiving',
+      hidden: true,
+      meta: {
+        title: '归档'
+      }
+    }, {
+      path: 'report/:month',
+      component: () => import('@/views/attendances/report'),
+      name: 'reports',
+      hidden: true,
+      meta: {
+        title: '报表'
+      }
     }
   ]
 }
+
+export default attendRouter
