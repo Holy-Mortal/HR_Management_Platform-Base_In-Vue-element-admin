@@ -59,7 +59,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'dashboard',
-        name: 'Dashboard',
+        name: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '首页', icon: 'dashboard' }
       }
@@ -94,9 +94,12 @@ export const asyncRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: [...constantRoutes]
+  // #后面是路由路径，特点是前端访问，#后面的变化不会经过服务器  hash模式
+  // 正常的/访问模式，特点是后端访问，任意地址的变化都会访问服务器  history模式
+  mode: 'history', // require service support
+  base: 'hr/',
+  scrollBehavior: () => ({ y: 0 }), // 管理滚动行为 如果出现滚动 切换就让 让页面回到顶部
+  routes: [...constantRoutes] // 改成只有静态路由
   // routes: [...constantRoutes, ...asyncRoutes] // 静态路由和动态路由的临时合并
 })
 

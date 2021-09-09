@@ -4,7 +4,7 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+// import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import '@/styles/index.scss' // global css
 
@@ -14,14 +14,20 @@ import router from './router'
 import Components from '@/components' // 注册自定义组件
 import * as directives from '@/directives' // 注册自定义指令
 import * as filters from '@/filters' // 注册自定义过滤器
+import i18n from '@/lang'
 import CheckPermission from '@/mixin/checkPermission' // 注册 mixin 组件检查方法
 import '@/icons' // icon
 import '@/permission' // permission control
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+// Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
-// Vue.use(ElementUI)
+Vue.use(ElementUI, {
+  // element 本身支持 i18n 的处理
+  // 此时 i18n 就会根据当前的 locale 属性去寻找对应的显示内容
+  i18n: (key, value) => i18n.t(key) // t方法 会去对应的语言包里寻找对应的内容
+  // 改变 locale 的值 就可以改变对应的当前语言
+})
 
 Object.keys(directives).forEach(key => {
   Vue.directive(key, directives[key]) // 注册自定义指令
@@ -43,5 +49,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })
